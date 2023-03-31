@@ -10,7 +10,7 @@ from chatgpt_wrapper.core.config import Config
 def create_application(name, config=None, timeout=60, proxy=None):
     config = config or Config()
     app = Flask(name)
-    chatgpt = OpenAIAPI(config)
+    chatgpt = OpenAIAPI(config, default_user_id=1)
 
     def _error_handler(message):
         return jsonify({"success": False, "error": str(message)}), 500

@@ -65,7 +65,7 @@ class DatabaseDevel(Database):
             password = None
             email = f'{username}@example.com'
             user = self.orm.add_user(username, password, email)
-            util.print_status_message(True, f"Created user: {user.username}", style="bold blue")
+            util.print_status_message(True, f"Created user: {user.username} {user.id}", style="bold blue")
             # Create Conversations for each User
             util.print_status_message(True, f"Creating {self.num_conversations} conversations and {self.num_messages} messages for: {user.username}...", style="white")
             for j in range(self.num_conversations):
