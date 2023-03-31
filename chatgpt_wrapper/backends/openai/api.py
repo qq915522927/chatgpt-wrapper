@@ -48,6 +48,7 @@ class AsyncOpenAIAPI(Backend):
             self.openai.api_key = os.getenv("OPENAI_API_KEY")
         if not self.openai.api_key:
             raise ValueError(f"{profile_prefix}_OPENAI_API_KEY or OPENAI_API_KEY environment variable must be set")
+        self.openai.proxy = "http://10.79.128.55:3128"
 
     def _handle_response(self, success, obj, message):
         if not success:
