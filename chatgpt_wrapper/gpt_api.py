@@ -7,11 +7,22 @@ from chatgpt_wrapper.backends.openai.api import OpenAIAPI
 from chatgpt_wrapper.core.config import Config
 from chatgpt_wrapper.backends.openai.orm import User
 from chatgpt_wrapper.backends.openai.user import UserManager
+from chatgpt_wrapper.backends.openai.database import Database
 
 def create_application(name, config=None, timeout=60, proxy=None):
     config = config or Config()
     app = Flask(name)
     chatgpt = OpenAIAPI(config)
+    db = Database(config)
+    print("creating schema")
+    db.create_schema()
+    u_manager =  UserManager(config)
+    print("registering user zhiwenw")
+    print(u_manager.register('zhiwenw'))
+    # set current user as the user who's username is zhiwenw
+    print("setting current user")
+    _, u, _ =  chatgpt.user_manager.get_by_username("zhiwenw")
+    chatgpt.set_current_user(u)
 
     def _error_handler(message):
         return jsonify({"success": False, "error": str(message)}), 500
@@ -32,9 +43,6 @@ def create_application(name, config=None, timeout=60, proxy=None):
             STRING:
                 Some response.
         """
-        # set current user as the user who's username is zhiwenw
-        _, u, _ =  chatgpt.user_manager.get_by_username("zhiwenw")
-        chatgpt.set_current_user(u)
         prompt = request.get_data().decode("utf-8")
         success, result, user_message = chatgpt.ask(prompt)
         print(user_message)
