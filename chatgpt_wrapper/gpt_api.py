@@ -33,6 +33,7 @@ def create_application(name, config=None, timeout=60, proxy=None):
         """
         prompt = request.get_data().decode("utf-8")
         success, result, user_message = chatgpt.ask(prompt)
+        print(user_message)
         return result
 
     @app.route("/conversations/new", methods=["POST"])
