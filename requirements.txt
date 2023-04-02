@@ -9,7 +9,7 @@ playwright
 prompt-toolkit
 pyperclip
 python-frontmatter
-PyYAML
 rich
-sqlalchemy
+sqlalchemy<2
 tiktoken
+PyYAML==5.4.1

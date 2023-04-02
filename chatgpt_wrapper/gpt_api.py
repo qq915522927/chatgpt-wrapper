@@ -18,7 +18,7 @@ def create_application(name, config=None, timeout=60, proxy=None):
     db.create_schema()
     u_manager =  UserManager(config)
     print("registering user zhiwenw")
-    print(u_manager.register('zhiwenw'))
+    print(u_manager.register('zhiwenw', '', ''))
     # set current user as the user who's username is zhiwenw
     print("setting current user")
     _, u, _ =  chatgpt.user_manager.get_by_username("zhiwenw")

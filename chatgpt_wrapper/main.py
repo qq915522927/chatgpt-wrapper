@@ -3,6 +3,8 @@ import os
 import sys
 import asyncio
 
+sys.path.append('../')
+
 from chatgpt_wrapper.version import __version__
 import chatgpt_wrapper.core.constants as constants
 from chatgpt_wrapper.core.config import Config
